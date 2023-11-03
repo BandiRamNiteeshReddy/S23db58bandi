@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1 Ram Niteesh Reddy Bandi
+
+  button(type="button", class="btn btn-secondary", onclick="goFaster()") push me
+  #faster
+     p Increase the speed
+
+  script. 
+    var mph=20;
+    var change=1;
+    function goFaster()
+    {
+      mph=mph+change;
+      change++;
+      document.getElementById("faster").innerHTML= `MPH ${mph} with change ${change}`;
+    }
+  a(href='http://localhost:3000/house') Link to Class  
+

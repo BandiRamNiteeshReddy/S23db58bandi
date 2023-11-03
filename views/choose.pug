@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Ram Niteesh Reddy Bandi
+
+    - var image_names = ['house-1.jpg', 'house-2.jpg', 'house-3.jpg', 'house-4.jpg', 'house-5.jpg']
+
+  - for (let i = 0; i < 3; i++) {
+    - var randomIndex = Math.floor(Math.random() * 5);
+    - let imagename = image_names[randomIndex];
+    img(src="/images/"+imagename, alt=`Image ${randomIndex + 1}`, height='100', width='100')
+  -}
+  
