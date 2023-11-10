@@ -1,28 +1,21 @@
 extends layout
 
 block content
-  h1 Ram Niteesh Reddy Bandi
+  h1= title
+  p Welcome to  Ram Niteesh Reddy Bandi #{title} page
 
   .container-fluid
-    .row
-      -
-        let results = [
-          { House_address:'1102 N walnut', House_colour:'Grey',House_capacity:15 },
-          { House_address:'218 coldenhall', House_colour:'white',House_capacity:5 },
-          { House_address:'415 N mulberry', House_colour:'Blue',House_capacity:20 }
-        ]
-    each item, index in results
-        .col-sm-2
-            h3 House
-            p #{item.House_address}, #{item.House_colour},#{item.House_capacity}
-            a(href='http://localhost:3000/', onclick=`buy(${index})`) Link to Index
-            
-
-  
-
-    
+  .row
+    -  
+    each house,idx in results 
+     .col-sm-2(onclick=`buy(${idx})`)
+        h3 house
+        p Model: #{house.House_address}
+        p Year: #{house.House_colour}
+        p Color: #{house.House_capacity}
 
   script.
-     function buy(x) {
-      alert(`You purchased item ${x}`);
-     } 
+    function buy(index) {
+      alert(`You purchased item ${index}.`);
+    }
+  

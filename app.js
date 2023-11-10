@@ -3,12 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var House = require('./models/house');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var houseRouter = require('./routes/house');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -27,14 +29,76 @@ app.use('/users', usersRouter);
 app.use('/house', houseRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
+
+require("dotenv").config();
+const connectionString = process.env.MONGO_CON;
+mongoose = require("mongoose");
+mongoose.connect(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+// /* only run to get screen shot 4
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+db.once("open", function () {
+  console.log("Connection to DB succeeded");
+});
+async function recreateDB() {
+  // Delete everything
+  await House.deleteMany();
+  let instance1 = new House({
+    House_address: '1102 N walnut', House_colour: 'Grey', House_capacity: 15
+  });
+  instance1
+    .save()
+    .then((doc) => {
+      console.log("First object saved");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+  let instance2 = new House({
+    House_address:'218 coldenhall', House_colour:'white',House_capacity:5
+
+  });
+  instance2
+    .save()
+    .then((doc) => {
+      console.log("First object saved");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  let instance3 = new House({
+    House_address:'415 N mulberry', House_colour:'Blue',House_capacity:20
+
+  });
+  instance3
+    .save()
+    .then((doc) => {
+      console.log("First object saved");
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+let reseed = true;
+if (reseed) {
+  recreateDB();
+}
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
