@@ -44,8 +44,17 @@ exports.house_create_post = async function (req, res) {
     }
   };
 // Handle house delete form on DELETE.
-exports.house_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: house delete DELETE ' + req.params.id);
+// Handle house delete on DELETE.
+exports.house_delete = async function(req, res) {
+console.log("delete " + req.params.id)
+try {
+result = await house.findByIdAndDelete( req.params.id)
+console.log("Removed " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": Error deleting ${err}}`);
+}
 };
 // Handle house update form on PUT.
 exports.house_update_put = async function(req, res) {
@@ -84,3 +93,16 @@ exports.house_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+    // Handle a show one view with id specified by query
+exports.house_view_one_Page = async function(req, res) {
+  console.log("single view for id " + req.query.id)
+  try{
+  result = await house.findById( req.query.id)
+  res.render('housedetail.pug',
+  { title: 'House Detail', toShow: result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+  };

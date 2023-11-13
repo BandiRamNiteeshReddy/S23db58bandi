@@ -1,0 +1,20 @@
+extends layout
+block content
+ h1= title
+ - let houseid = toShow._id
+ - let house_address = toShow.House_address
+ - let house_capacity = toShow.House_capacity
+ - let house_colour = toShow.House_colour
+ div
+ div.row
+ div(class='houseAttr mr-3') House ID is:
+ div #{houseid}
+ div.row
+ div(class='houseAttr mr-3') House_address is:
+ div #{house_address}
+ div.row
+ div(class='houseAttr mr-3') House_colour is:
+ div #{house_colour}
+ div.row
+ div(class='houseAttr mr-3') House_capacity is:
+ div #{house_capacity}

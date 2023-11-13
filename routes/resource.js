@@ -8,13 +8,13 @@ var house_controller = require('../controllers/house');
 router.get('/', api_controller.api);
 /// house ROUTES ///
 // POST request for creating a house.
-router.post('/houses', house_controller.house_create_post);
+router.post('/house', house_controller.house_create_post);
 // DELETE request to delete house.
-router.delete('/houses/:id', house_controller.house_delete);
+router.delete('/house/:id', house_controller.house_delete);
 // PUT request to update house.
-router.put('/houses/:id', house_controller.house_update_put);
+router.put('/house/:id', house_controller.house_update_put);
 // GET request for one house.
-router.get('/houses/:id', house_controller.house_detail);
+router.get('/house/:id', house_controller.house_detail);
 // GET request for list of all house items.
-router.get('/houses', house_controller.house_list);
+router.get('/house', house_controller.house_list);
 module.exports = router;
