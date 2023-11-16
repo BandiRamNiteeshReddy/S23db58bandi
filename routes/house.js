@@ -1,6 +1,10 @@
 var express = require('express');
 const house_controlers= require('../controllers/house');
 var router = express.Router();
-// GET request for one house.
-router.get('/detail', house_controlers.house_view_one_Page);
+
+/* GET create update page */
+router.get('/update', house_controlers.house_update_Page);
+
+/* GET delete house page */
+router.get('/delete', house_controlers.house_delete_Page);
 module.exports = router;

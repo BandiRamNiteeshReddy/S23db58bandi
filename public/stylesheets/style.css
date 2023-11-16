@@ -9,5 +9,18 @@ a {
 
 .houseAttr{
   background-color:aquamarine;
-  width: 120px;
+  width: 200px;
+  font-family:fantasy;
+}
+
+.variable{
+  background-color:darkgray;
+  width: 500px;
+  font-style: oblique;
+}
+
+.head{
+  background-color:cornflowerblue;
+  width:700px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

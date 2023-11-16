@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  h1(class='head')= title
+
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let id = toShow._id
+    - let housesize = toShow.House_address
+    - let housecolour = toShow.House_colour
+    - let houseprice = toShow. House_capacity
+    - let actionid = "/resource/house/" + id 
+    script.
+      let actionid = "#{actionid}"
+    div 
+      div.row
+        div(class='houseAttr mr-3') house ID is: 
+        div(class='variable') #{id} 
+        div.row 
+        div(class='houseAttr mr-3') House_address is:
+        div(class='variable') #{housesize} 
+        div.row 
+        div(class='houseAttr mr-3')  House_colour is: 
+        div(class='variable') #{housecolour} 
+        div.row 
+        div(class='houseAttr mr-3')  House_capacity is: 
+        div(class='variable') #{houseprice} 
+
+    button(class="btn btn-danger" onclick="deleteOnid()") Delete 
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+
+  script.
+    function cancel() {
+      // Go back to the home page for the costume collection
+      window.location.href='/houses'
+    }
+
+    function deleteOnid() {
+      console.log("starting delete");
+      // delete first
+      fetch(actionid, {
+        method: 'DELETE' // Don't need a body for the delete
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Delete succeeded");
+        window.location.href='/house';
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Delete failed " + error );
+      });
+    }

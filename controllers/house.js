@@ -106,3 +106,45 @@ exports.house_view_one_Page = async function(req, res) {
   res.send(`{'error': '${err}'}`);
   }
   };
+
+  // Handle building the view for creating a house.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.house_create_Page = function(req, res) {
+  console.log("create view")
+  try{
+  res.render('housecreate', { title: 'House Create'});
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };
+
+ // Handle building the view for updating a house.
+// query provides the id
+exports.house_update_Page = async function(req, res) {
+  console.log("update view for item "+req.query.id)
+  try{
+  let result = await house.findById(req.query.id)
+  res.render('houseupdate.pug', { title: 'House Update', toShow: result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };
+
+ // Handle a delete one view with id from query
+exports.house_delete_Page = async function(req, res) {
+  console.log("Delete view for id " + req.query.id)
+  try{
+  result = await house.findById(req.query.id)
+  res.render('housedelete', { title: 'House Delete', toShow:
+ result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };

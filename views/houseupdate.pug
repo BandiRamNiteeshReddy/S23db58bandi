@@ -1,0 +1,41 @@
+extends layout
+ 
+block content
+    h1= title
+ 
+    if (toShow == null)
+        h2 No instance to update details
+    else
+        - let houseid = toShow._id
+        - let houseName = toShow.House_address
+        - let housePrice = toShow.House_capacity
+        - let houseSize = toShow.House_colour
+        div.row(class='mb-2')
+            div.mr-1 ID is
+            div #{houseid}
+        - let actionid = "/resource/houses/" + houseid
+        form(id='houseForm' action=actionid method="POST")
+            div.form-group
+                label.houseAttr(for='houseName') House_address
+                input#houseName(type='text' name='houseName' value=houseName)
+            div.form-group
+                label.houseAttr(for='housePrice') House_capacity
+                input#housePrice(type='text' name='housePrice' value=housePrice)
+            div.form-group
+                label.houseAttr(for='houseSize') House_colour
+                input#houseSize(type='text' name='houseSize' value=houseSize)
+            input(type="submit")
+        script.
+            document.forms['houseForm'].addEventListener('submit', (event) => {
+                event.preventDefault();                    
+                fetch(event.target.action, {
+                    method: 'PUT', // Use PUT method
+                    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                }).then((resp) => {
+                    return resp.text();
+                }).then((body) => {
+                    alert("Save succeeded");
+                }).catch((error) => {
+                    alert("Save failed: " + error);
+                });
+            });
