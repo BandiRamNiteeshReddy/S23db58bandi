@@ -2,20 +2,24 @@ extends layout
 
 block content
   h1= title
-  p Welcome to  Ram Niteesh Reddy Bandi #{title} page
+  p Welcome to Ram Niteesh Reddy Bandi #{title} page
 
   .container-fluid
-  .row
-    -  
-    each house,idx in results 
-     .col-sm-2(onclick=`buy(${idx})`)
-        h3 house
-        p Model: #{house.House_address}
-        p Year: #{house.House_colour}
-        p Color: #{house.House_capacity}
+    .row
+      each house, idx in results 
+        .col-sm-2(onclick=`buy(${idx})`)
+          h3= house
+          p Address: #{house.House_address}
+          p Colour: #{house.House_colour}
+          p Capacity: #{house.House_capacity}
+          - let destination = `dispatch("/house/update?id=${house._id}")`
+          div(class="row-sm-2", class="m-1") Item #{house.House_address}(#{house.House_colour}) is #{house.House_capacity}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
 
   script.
     function buy(index) {
       alert(`You purchased item ${index}.`);
     }
-  
+    function dispatch(path){
+      window.location.href = path;
+    }
