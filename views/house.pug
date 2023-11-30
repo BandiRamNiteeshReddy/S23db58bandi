@@ -13,8 +13,14 @@ block content
           p Colour: #{house.House_colour}
           p Capacity: #{house.House_capacity}
           - let destination = `dispatch("/house/update?id=${house._id}")`
+          - let destination1 = `dispatch("/house/details?id=${house._id}")`
+          - let destination2 = `dispatch("/house/delete?id=${house._id}")`
+          - let destination3 = `dispatch("/house/create?id=${house._id}")`
           div(class="row-sm-2", class="m-1") Item #{house.House_address}(#{house.House_colour}) is #{house.House_capacity}
           button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-success m-1", onclick= destination1) Details
+          button.btn( class="btn-danger m-1", onclick= destination2) Delete
+          button.btn( class="btn-secondary m-1", onclick= destination3) create
 
   script.
     function buy(index) {

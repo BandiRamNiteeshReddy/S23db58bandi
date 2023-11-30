@@ -7,6 +7,7 @@ block content
   #faster
      p Increase the speed
 
+   
   script. 
     var mph=20;
     var change=1;
@@ -17,4 +18,15 @@ block content
       document.getElementById("faster").innerHTML= `MPH ${mph} with change ${change}`;
     }
   a(href='http://localhost:3000/house') Link to Class  
+   br
+   if (!user)
+     a(href="/login") Login
+     br
+     a(href="/register") Register
+   if (user)
+      p You are currently logged in as #{user.username}
+      a(href="/house") Take me to house
+      br
+      a(href="/logout") Logout
+
 

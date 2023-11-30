@@ -62,13 +62,14 @@ exports.house_update_put = async function(req, res) {
   ${JSON.stringify(req.body)}`)
   try {
   let toUpdate = await house.findById( req.params.id)
+  console.log({toUpdate})
   // Do updates of properties
   if(req.body.House_address)
   toUpdate.House_address = req.body.House_address;
   if(req.body.House_colour) toUpdate.House_colour = req.body.House_colour;
   if(req.body.House_capacity) toUpdate.House_capacity = req.body.House_capacity;
-  if(req.body.checkboxsale) toUpdate.sale = true;
-else toUpdate.same = false;
+//   if(req.body.checkboxsale) toUpdate.sale = true;
+// else toUpdate.same = false;
 
   let result = await toUpdate.save();
   console.log("Sucess " + result)
@@ -148,3 +149,5 @@ exports.house_delete_Page = async function(req, res) {
   res.send(`{'error': '${err}'}`);
   }
  };
+
+ 

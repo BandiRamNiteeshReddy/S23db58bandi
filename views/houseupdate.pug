@@ -13,17 +13,17 @@ block content
         div.row(class='mb-2')
             div.mr-1 ID is
             div #{houseid}
-        - let actionid = "/resource/houses/" + houseid
+        - let actionid = "/resource/house/" + houseid
         form(id='houseForm' action=actionid method="POST")
             div.form-group
                 label.houseAttr(for='houseName') House_address
-                input#houseName(type='text' name='houseName' value=houseName)
+                input#houseName(type='text' name='House_address' value=houseName)
             div.form-group
                 label.houseAttr(for='housePrice') House_capacity
-                input#housePrice(type='text' name='housePrice' value=housePrice)
+                input#housePrice(type='text' name='House_capacity' value=housePrice)
             div.form-group
                 label.houseAttr(for='houseSize') House_colour
-                input#houseSize(type='text' name='houseSize' value=houseSize)
+                input#houseSize(type='text' name='House_colour' value=houseSize)
             input(type="submit")
         script.
             document.forms['houseForm'].addEventListener('submit', (event) => {
